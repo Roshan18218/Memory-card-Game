@@ -1,0 +1,190 @@
+/* General Reset */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Info Bar Styling */
+.info-bar {
+    background: white;
+    padding: 15px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    color: #444;
+    flex-wrap: wrap;
+}
+
+.info-bar span {
+    margin-right: 15px;
+}
+
+.info-bar strong {
+    color: #007bff;
+    font-size: 1.3rem;
+}
+
+/* Button Styling */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s, transform 0.1s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Game Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+    gap: 15px;
+    perspective: 1000px; /* Essential for 3D flip effect */
+}
+
+/* Card Container */
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card.matched {
+    cursor: default;
+}
+
+/* Front and Back of Card */
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    overflow: hidden;
+}
+
+/* Image inside card */
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* keeps image filling the box */
+    display: block;
+}
+
+.card-front {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 2rem;
+}
+
+.card-back {
+    background: white;
+    transform: rotateY(180deg);
+    border: 2px solid #e0e0e0;
+}
+
+/* Overlay for Win/Lose */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2.5rem;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.overlay.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.overlay h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.overlay p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: #ddd;
+}
+
+.overlay button {
+    font-size: 1.2rem;
+    padding: 12px 30px;
+}
+
+/* Win specific styles */
+.overlay.win h2 { color: #28a745; }
+.overlay.win button { background-color: #28a745; }
+.overlay.win button:hover { background-color: #218838; }
+
+/* Lose specific styles */
+.overlay.lose h2 { color: #dc3545; }
+.overlay.lose button { background-color: #dc3545; }
+.overlay.lose button:hover { background-color: #c82333; }
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(4, 70px);
+        grid-template-rows: repeat(4, 70px);
+        gap: 10px;
+    }
+    h1 { font-size: 1.5rem; }
+    .info-bar { font-size: 0.9rem; padding: 10px 20px; }
+    .card-face { font-size: 1.8rem; }
+    .overlay h2 { font-size: 2rem; }
+}
